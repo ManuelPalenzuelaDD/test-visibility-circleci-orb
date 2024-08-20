@@ -2,9 +2,9 @@
 
 mkdir .datadog
 
-echo 'export DD_API_KEY="$DD_API_KEY"' >> "$BASH_ENV"
-echo 'export DD_SERVICE="$DD_SERVICE"' >> "$BASH_ENV"
-echo 'export DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER="circleci"' >> "$BASH_ENV"
+echo "export DD_API_KEY=$DD_API_KEY" >> "$BASH_ENV"
+echo "export DD_SERVICE=$DD_SERVICE" >> "$BASH_ENV"
+echo "export DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER=circleci" >> "$BASH_ENV"
 
 installation_script_url="https://install.datadoghq.com/scripts/install_test_visibility_v2.sh"
 installation_script_checksum="7c888969cf45b4a2340d5cf58afa2e7110a295904ca182724b88a3d19e9bc18d"
