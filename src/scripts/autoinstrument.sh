@@ -44,4 +44,4 @@ fi
 echo "---"
 
 # TODO: Need to export the env vars from the script and also the inputs!
-export TEST1234="1234"
+echo "TEST1234=1234" >> "$BASH_ENV"
