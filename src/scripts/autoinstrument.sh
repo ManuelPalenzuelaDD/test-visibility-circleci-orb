@@ -29,16 +29,16 @@ done < <(DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER="gitlab" ./install_test_v
 echo "---"
 echo "Installed Test Visibility libraries:"
 
-if [ ! -z "$DD_TRACER_VERSION_DOTNET" ]; then
+if [ -n "$DD_TRACER_VERSION_DOTNET" ]; then
   echo "- __.NET:__ $DD_TRACER_VERSION_DOTNET"
 fi
-if [ ! -z "$DD_TRACER_VERSION_JAVA" ]; then
+if [ -n "$DD_TRACER_VERSION_JAVA" ]; then
   echo "- __Java:__ $DD_TRACER_VERSION_JAVA"
 fi
-if [ ! -z "$DD_TRACER_VERSION_JS" ]; then
+if [ -n "$DD_TRACER_VERSION_JS" ]; then
   echo "- __JS:__ $DD_TRACER_VERSION_JS"
 fi
-if [ ! -z "$DD_TRACER_VERSION_PYTHON" ]; then
+if [ -n "$DD_TRACER_VERSION_PYTHON" ]; then
   echo "- __Python:__ $DD_TRACER_VERSION_PYTHON"
 fi
 echo "---"
