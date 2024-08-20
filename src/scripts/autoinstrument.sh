@@ -24,7 +24,7 @@ while IFS='=' read -r name value; do
   if [[ $name =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
     export "$name=$value"
   fi
-done < <(DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER="gitlab" ./install_test_visibility.sh)
+done < <(DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER="circleci" ./install_test_visibility.sh)
 
 echo "---"
 echo "Installed Test Visibility libraries:"
@@ -43,4 +43,5 @@ if [ -n "$DD_TRACER_VERSION_PYTHON" ]; then
 fi
 echo "---"
 
+# TODO: Need to export the env vars from the script and also the inputs!
 export TEST1234="1234"
