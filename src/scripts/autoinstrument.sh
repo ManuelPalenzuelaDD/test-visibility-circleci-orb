@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir .datadog
+
 installation_script_url="https://install.datadoghq.com/scripts/install_test_visibility_v2.sh"
 installation_script_checksum="7c888969cf45b4a2340d5cf58afa2e7110a295904ca182724b88a3d19e9bc18d"
 script_filepath="install_test_visibility.sh"
