@@ -18,6 +18,9 @@ if ! echo "$installation_script_checksum $script_filepath" | sha256sum --quiet -
         exit 1
 fi
 
+echo LANGS
+echo $DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES
+
 chmod +x ./install_test_visibility.sh
 
 while IFS='=' read -r name value; do
