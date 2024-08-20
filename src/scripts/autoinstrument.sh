@@ -32,8 +32,7 @@ chmod +x ./install_test_visibility.sh
 while IFS='=' read -r name value; do
   if [[ $name =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
     echo "$name=$value"
-    export "$name=$value"
-    echo 'export "$name=$value"' >> "$BASH_ENV"
+    echo "export $name=$value" >> "$BASH_ENV"
   fi
 done < <(./install_test_visibility.sh)
 
