@@ -28,7 +28,8 @@ jobs:
     steps:
       - checkout
       # Run your orb's commands to validate them.
-      - test-visibility-circleci-orb/greet
+      - test-visibility-circleci-orb/autoinstrument:
+          to: test123
 workflows:
   test-deploy:
     jobs:
