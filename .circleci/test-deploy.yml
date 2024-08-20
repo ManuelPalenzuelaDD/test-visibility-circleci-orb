@@ -35,6 +35,7 @@ jobs:
       - run: |
           echo "$_JAVA_OPTIONS"
           echo $TEST1234
+          export DD_TRACE_DEBUG=true
           export DD_TRACER_FOLDER=/root/project/.datadog
           export LOG_FILE=java-output.log
           echo $LOG_FILE
