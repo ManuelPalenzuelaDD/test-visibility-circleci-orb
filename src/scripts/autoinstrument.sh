@@ -25,7 +25,7 @@ chmod +x ./install_test_visibility.sh
 
 while IFS='=' read -r name value; do
   if [[ $name =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
-    echo "$name"
+    echo "$name=$value"
     echo "$name=$value" >> "$BASH_ENV"
   fi
 done < <(DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER="circleci" DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES="$DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES" ./install_test_visibility.sh)
@@ -46,6 +46,10 @@ if [ -n "$DD_TRACER_VERSION_PYTHON" ]; then
   echo "- __Python:__ $DD_TRACER_VERSION_PYTHON"
 fi
 echo "---"
+
+echo "BASH_ENV START"
+cat "$BASH_ENV"
+echo "BASH_ENV END"
 
 # TODO: Need to export the env vars from the script and also the inputs!
 echo "TEST1234=1234" >> "$BASH_ENV"
