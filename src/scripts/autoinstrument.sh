@@ -35,16 +35,16 @@ done < <(DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER="circleci" DD_CIVISIBILIT
 echo "---"
 echo "Installed Test Visibility libraries:"
 
-if [ -n "$DD_TRACER_VERSION_DOTNET" ]; then
+if grep -q "$DD_TRACER_VERSION_DOTNET" "$BASH_ENV"; then
   echo "- __.NET:__ $DD_TRACER_VERSION_DOTNET"
 fi
-if [ -n "$DD_TRACER_VERSION_JAVA" ]; then
+if grep -q "$DD_TRACER_VERSION_JAVA" "$BASH_ENV"; then
   echo "- __Java:__ $DD_TRACER_VERSION_JAVA"
 fi
-if [ -n "$DD_TRACER_VERSION_JS" ]; then
+if grep -q "$DD_TRACER_VERSION_JS" "$BASH_ENV"; then
   echo "- __JS:__ $DD_TRACER_VERSION_JS"
 fi
-if [ -n "$DD_TRACER_VERSION_PYTHON" ]; then
+if grep -q "$DD_TRACER_VERSION_PYTHON" "$BASH_ENV"; then
   echo "- __Python:__ $DD_TRACER_VERSION_PYTHON"
 fi
 echo "---"
