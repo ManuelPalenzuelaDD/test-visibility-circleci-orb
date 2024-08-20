@@ -18,5 +18,5 @@ steps:
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: <<parameters.languages>>
         DD_SERVICE: <<parameters.service>>
         DD_API_KEY: <<parameters.api_key>>
-      name: Hello Greeting
+      name: Configure Datadog Test Visibility
       command: <<include(scripts/autoinstrument.sh)>>
