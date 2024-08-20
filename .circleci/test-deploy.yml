@@ -29,14 +29,13 @@ jobs:
       - checkout
       # Run your orb's commands to validate them. TODO
       - test-visibility-circleci-orb/autoinstrument:
-          languages: python
+          languages: java
           service: my-service
           api_key: dummy
       - run: |
           export LOG_FILE=java-output.log
           export TRACER_INIT_LOG="CI Visibility settings"
           java -version 2>&1 | tee $LOG_FILE
-          grep "$TRACER_INIT_LOG" $LOG_FILE
           grep -q "$TRACER_INIT_LOG" $LOG_FILE || { echo "Error: Output does not contain tracer initialisation log: $TRACER_INIT_LOG"; exit 1; }
 workflows:
   test-deploy:
