@@ -2,6 +2,10 @@
 
 mkdir .datadog
 
+echo 'export DD_API_KEY="$DD_API_KEY"' >> "$BASH_ENV"
+echo 'export DD_SERVICE="$DD_SERVICE"' >> "$BASH_ENV"
+echo 'export DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER="circleci"' >> "$BASH_ENV"
+
 installation_script_url="https://install.datadoghq.com/scripts/install_test_visibility_v2.sh"
 installation_script_checksum="7c888969cf45b4a2340d5cf58afa2e7110a295904ca182724b88a3d19e9bc18d"
 script_filepath="install_test_visibility.sh"
@@ -29,12 +33,18 @@ while IFS='=' read -r name value; do
   if [[ $name =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
     echo "$name=$value"
     export "$name=$value"
-    echo "$name=$value" >> "$BASH_ENV"
+    echo 'export "$name=$value"' >> "$BASH_ENV"
   fi
-done < <(DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER="circleci" ./install_test_visibility.sh)
+done < <(./install_test_visibility.sh)
 
 echo "---"
 echo "Installed Test Visibility libraries:"
+
+echo "BASH_ENV START"
+cat "$BASH_ENV"
+echo "BASH_ENV END"
+
+source "$BASH_ENV"
 
 if [ -n "$DD_TRACER_VERSION_DOTNET" ]; then
   echo "- __.NET:__ $DD_TRACER_VERSION_DOTNET"
@@ -49,10 +59,3 @@ if [ -n "$DD_TRACER_VERSION_PYTHON" ]; then
   echo "- __Python:__ $DD_TRACER_VERSION_PYTHON"
 fi
 echo "---"
-
-echo "BASH_ENV START"
-cat "$BASH_ENV"
-echo "BASH_ENV END"
-
-# TODO: Need to export the env vars from the script and also the inputs!
-echo "TEST1234=1234" >> "$BASH_ENV"
