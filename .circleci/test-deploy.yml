@@ -33,6 +33,7 @@ jobs:
           service: my-service
           api_key: dummy
       - run: |
+          echo "$_JAVA_OPTIONS"
           echo $TEST1234
           export LOG_FILE=java-output.log
           echo $LOG_FILE
