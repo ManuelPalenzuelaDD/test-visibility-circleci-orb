@@ -3,13 +3,20 @@ description: >
 # What will this command do?
 # Descriptions should be short, simple, and clear.
 parameters:
-  to:
+  languages:
     type: string
-    default: "World"
+    description: "Hello to whom?"
+  service:
+    type: string
+    description: "Hello to whom?"
+  api_key:
+    type: string
     description: "Hello to whom?"
 steps:
   - run:
       environment:
-        PARAM_TO: <<parameters.to>>
+        DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: <<parameters.languages>>
+        DD_SERVICE: <<parameters.service>>
+        DD_API_KEY: <<parameters.api_key>>
       name: Hello Greeting
       command: <<include(scripts/autoinstrument.sh)>>
