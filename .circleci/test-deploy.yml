@@ -33,8 +33,8 @@ jobs:
           service: my-service
           api_key: dummy
       - run: |
-          echo $TEST1234 \\
-          echo "A" \\
+          echo $TEST1234
+          echo "A"
           echo $TEST1234
           # export LOG_FILE=java-output.log \\
           # export TRACER_INIT_LOG="CI Visibility settings" \\
