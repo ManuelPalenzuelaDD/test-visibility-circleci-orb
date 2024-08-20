@@ -37,11 +37,12 @@ jobs:
           export LOG_FILE=java-output.log
           echo $LOG_FILE
           export TRACER_INIT_LOG="CI Visibility settings"
+          echo "$JAVA_TOOL_OPTIONS"
+          echo "$DD_TRACER_VERSION_JAVA"
           java -version 2>&1 | tee $LOG_FILE
           echo "LOG START"
           cat $LOG_FILE
           echo "LOG END"
-          echo "$JAVA_TOOL_OPTIONS"
           ls -la
           ls -la .datadog
           grep "$TRACER_INIT_LOG" $LOG_FILE
