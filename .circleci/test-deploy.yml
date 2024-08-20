@@ -41,6 +41,7 @@ jobs:
           echo "$JAVA_TOOL_OPTIONS"
           echo "$DD_TRACER_VERSION_JAVA"
           java -version 2>&1 | tee $LOG_FILE
+          JAVA_TOOL_OPTIONS="-javaagent:/root/project/.datadog/dd-java-agent.jar" java -version
           echo "LOG START"
           cat $LOG_FILE
           echo "LOG END"
