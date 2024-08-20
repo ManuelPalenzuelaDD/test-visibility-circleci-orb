@@ -31,7 +31,7 @@ while IFS='=' read -r name value; do
     export "$name=$value"
     echo "$name=$value" >> "$BASH_ENV"
   fi
-done < <(DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER="circleci" DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES="$DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES" ./install_test_visibility.sh)
+done < <(DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER="circleci" ./install_test_visibility.sh)
 
 echo "---"
 echo "Installed Test Visibility libraries:"
