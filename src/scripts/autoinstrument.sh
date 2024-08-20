@@ -22,7 +22,7 @@ chmod +x ./install_test_visibility.sh
 
 while IFS='=' read -r name value; do
   if [[ $name =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
-    export "$name=$value"
+    echo "$name=$value" >> "$BASH_ENV"
   fi
 done < <(DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER="circleci" ./install_test_visibility.sh)
 
