@@ -42,6 +42,7 @@ steps:
       environment:
         API_KEY: <<parameters.api_key>>
         SERVICE: <<parameters.service>>
+        SITE: <<parameters.site>>
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: <<parameters.languages>>
         DD_SET_TRACER_VERSION_DOTNET: <<parameters.dotnet_tracer_version>>
         DD_SET_TRACER_VERSION_JAVA: <<parameters.java_tracer_version>>

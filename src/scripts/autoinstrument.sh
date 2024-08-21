@@ -7,12 +7,15 @@
 
 mkdir .datadog
 
-# Propagate service name and API key from inputs to environment variables
+# Propagate service name, site and API key from inputs to environment variables
 if [ -n "$API_KEY" ]; then
 	echo "export DD_API_KEY=$API_KEY" >> "$BASH_ENV"
 fi
 if [ -n "$SERVICE" ]; then
 	echo "export DD_SERVICE=$SERVICE" >> "$BASH_ENV"
+fi
+if [ -n "$SITE" ]; then
+	echo "export DD_SITE=$SITE" >> "$BASH_ENV"
 fi
 
 echo "export DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER=circleci" >> "$BASH_ENV"
