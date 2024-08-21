@@ -12,6 +12,8 @@ installation_script_url="https://install.datadoghq.com/scripts/install_test_visi
 installation_script_checksum="7c888969cf45b4a2340d5cf58afa2e7110a295904ca182724b88a3d19e9bc18d"
 script_filepath="install_test_visibility.sh"
 
+echo "TEST1234: $TEST1234"
+
 if command -v curl >/dev/null 2>&1; then
 	curl -Lo "$script_filepath" "$installation_script_url"
 elif command -v wget >/dev/null 2>&1; then
