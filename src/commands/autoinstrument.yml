@@ -1,6 +1,5 @@
 description: >
   Installs Datadog tracers for configured languages and enables Test Visibility.
-# TODO: Can we pass api keys as environment variables?
 parameters:
   languages:
     description: 'List of languages to be instrumented. Can be either "all" or any of "java", "js", "python", "dotnet" (multiple languages can be specified as a space-separated list).'

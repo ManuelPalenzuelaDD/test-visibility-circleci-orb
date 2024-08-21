@@ -55,10 +55,6 @@ done < <(./install_test_visibility.sh)
 echo "---"
 echo "Installed Test Visibility libraries:"
 
-echo "BASH ENV BEGING"
-cat "$BASH_ENV"
-echo "BASH ENV END"
-
 # shellcheck source=/dev/null
 source "$BASH_ENV"
 
