@@ -7,17 +7,16 @@
 
 mkdir .datadog
 
-echo "parameter: << parameters.api_key >>"
+echo "parameter: $API_KEY"
 
 # Propagate service name and API key from inputs to environment variables
-# shellcheck disable=SC2157
-if [ -n "<<parameters.api_key>>" ]; then
-	echo "export DD_API_KEY=<<parameters.api_key>>" >> "$BASH_ENV"
+if [ -n "$API_KEY" ]; then
+	echo "export DD_API_KEY=$API_KEY" >> "$BASH_ENV"
 fi
 
 # shellcheck disable=SC2157
-if [ -n "<<parameters.service>>" ]; then
-	echo "export DD_SERVICE=<<parameters.service>>" >> "$BASH_ENV"
+if [ -n "$SERVICE" ]; then
+	echo "export DD_SERVICE=$SERVICE" >> "$BASH_ENV"
 fi
 
 echo "export DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER=circleci" >> "$BASH_ENV"
