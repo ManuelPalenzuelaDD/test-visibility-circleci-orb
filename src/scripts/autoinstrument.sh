@@ -43,6 +43,7 @@ echo "BASH_ENV START"
 cat "$BASH_ENV"
 echo "BASH_ENV END"
 
+# shellcheck source=/dev/null
 source "$BASH_ENV"
 
 if [ -n "$DD_TRACER_VERSION_DOTNET" ]; then
