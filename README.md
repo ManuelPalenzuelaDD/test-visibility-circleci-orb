@@ -1,6 +1,6 @@
 # <img height="25" src="logos/test_visibility_logo.png" />  Datadog Test Visibility CircleCI Orb
 
-CircleCI orb that installs and configures [Datadog Test Visibility](https://docs.datadoghq.com/tests/).
+[CircleCI orb](https://circleci.com/orbs/registry/orb/datadog/test-visibility-circleci-orb) that installs and configures [Datadog Test Visibility](https://docs.datadoghq.com/tests/).
 Supported languages are .NET, Java, Javascript, and Python.
 
 ## About Datadog Test Visibility
