@@ -27,7 +27,7 @@ jobs:
       - image: adoptopenjdk/openjdk11:latest
     steps:
       - checkout
-      - run: export TEST1234=1234
+      - run: export TEST1234=1234 >> $BASH_ENV
       # Test that the autoinstrumentation command orb works as expected.
       - test-visibility-circleci-orb/autoinstrument:
           languages: java
