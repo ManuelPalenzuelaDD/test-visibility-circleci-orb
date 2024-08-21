@@ -10,7 +10,7 @@ It can help you investigate and mitigate performance problems and test failures 
 
 ## Usage
 
-Execute this command orb as part of your CircleCI job YAML before running the tests. Pass the languages, api key and [site](https://docs.datadoghq.com/getting_started/site/) environment variables:
+Execute this command orb as part of your CircleCI job YAML before running the tests. Set the languages, api key and [site](https://docs.datadoghq.com/getting_started/site/) parameters:
 
  ```yaml
 version: 2.1
@@ -34,7 +34,7 @@ jobs:
 
 ## Configuration
 
-The script takes in the following environment variables:
+The orb has the following parameters:
 
 | Name | Description | Required | Default |
 | ---- | ----------- | -------- | ------- |
