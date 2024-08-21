@@ -1,39 +1,97 @@
-# Orb Template 1
+# <img height="25" src="logos/test_visibility_logo.png" />  Datadog Test Visibility CircleCI Orb
 
+CircleCI orb that installs and configures [Datadog Test Visibility](https://docs.datadoghq.com/tests/).
+Supported languages are .NET, Java, Javascript, and Python.
 
-[![CircleCI Build Status](https://circleci.com/gh/ManuelPalenzuelaDD/test-visibility-circleci-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/ManuelPalenzuelaDD/test-visibility-circleci-orb) [![CircleCI Orb Version](https://badges.circleci.com/orbs/manueltest/test-visibility-circleci-orb.svg)](https://circleci.com/developer/orbs/orb/manueltest/test-visibility-circleci-orb) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/ManuelPalenzuelaDD/test-visibility-circleci-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
+## About Datadog Test Visibility
 
+[Test Visibility](https://docs.datadoghq.com/tests/) provides a test-first view into your CI health by displaying important metrics and results from your tests.
+It can help you investigate and mitigate performance problems and test failures that are most relevant to your work, focusing on the code you are responsible for, rather than the pipelines which run your tests.
 
+## Usage
 
-A project template for Orbs.
+Execute this command orb as part of your CircleCI job YAML before running the tests. Pass the languages, api key and [site](https://docs.datadoghq.com/getting_started/site/) environment variables:
 
-This repository is designed to be automatically ingested and modified by the CircleCI CLI's `orb init` command.
+ ```yaml
+version: 2.1
 
-_**Edit this area to include a custom title and description.**_
+orbs:
+  test-visibility-circleci-orb: manueltest/test-visibility-circleci-orb@1.0.5 #TODO
 
----
+jobs:
+  test:
+    docker:
+      - image: python:latest
+    steps:
+      - checkout
+      - run: pip install pytest
+      - test-visibility-circleci-orb/autoinstrument:
+          languages: python
+          api_key: YOUR_API_KEY_SECRET
+          site: datadoghq.com
+      - run: pytest
+ ```
 
-## Resources
+## Configuration
 
-[CircleCI Orb Registry Page](https://circleci.com/developer/orbs/orb/manueltest/test-visibility-circleci-orb) - The official registry page of this orb for all versions, executors, commands, and jobs described.
+The script takes in the following environment variables:
 
-[CircleCI Orb Docs](https://circleci.com/docs/orb-intro/#section=configuration) - Docs for using, creating, and publishing CircleCI Orbs.
+| Name | Description | Required | Default |
+| ---- | ----------- | -------- | ------- |
+ | languages | List of languages to be instrumented. Can be either "all" or any of "java", "js", "python", "dotnet" (multiple languages can be specified as a space-separated list). | true | |
+ | api_key | Datadog API key. Can be found at https://app.datadoghq.com/organization-settings/api-keys | true | |
+ | site | Datadog site. See https://docs.datadoghq.com/getting_started/site for more information about sites. | false | datadoghq.com |
+ | service | The name of the service or library being tested. | false | |
+ | dotnet_tracer_version | The version of Datadog .NET tracer to use. Defaults to the latest release. | false | |
+ | java_tracer_version | The version of Datadog Java tracer to use. Defaults to the latest release. | false | |
+ | js_tracer_version | The version of Datadog JS tracer to use. Defaults to the latest release. | false | |
+ | python_tracer_version | The version of Datadog Python tracer to use. Defaults to the latest release. | false | |
+ | java_instrumented_build_system | If provided, only the specified build systems will be instrumented (allowed values are `gradle` and `maven`). Otherwise every Java process will be instrumented. | false | |
 
-### How to Contribute
+### Additional configuration
 
-We welcome [issues](https://github.com/ManuelPalenzuelaDD/test-visibility-circleci-orb/issues) to and [pull requests](https://github.com/ManuelPalenzuelaDD/test-visibility-circleci-orb/pulls) against this repository!
+Any [additional configuration values](https://docs.datadoghq.com/tracing/trace_collection/library_config/) can be added directly to the job that runs your tests:
 
-### How to Publish An Update
-1. Merge pull requests with desired changes to the main branch.
-    - For the best experience, squash-and-merge and use [Conventional Commit Messages](https://conventionalcommits.org/).
-2. Find the current version of the orb.
-    - You can run `circleci orb info manueltest/test-visibility-circleci-orb | grep "Latest"` to see the current version.
-3. Create a [new Release](https://github.com/ManuelPalenzuelaDD/test-visibility-circleci-orb/releases/new) on GitHub.
-    - Click "Choose a tag" and _create_ a new [semantically versioned](http://semver.org/) tag. (ex: v1.0.0)
-      - We will have an opportunity to change this before we publish if needed after the next step.
-4.  Click _"+ Auto-generate release notes"_.
-    - This will create a summary of all of the merged pull requests since the previous release.
-    - If you have used _[Conventional Commit Messages](https://conventionalcommits.org/)_ it will be easy to determine what types of changes were made, allowing you to ensure the correct version tag is being published.
-5. Now ensure the version tag selected is semantically accurate based on the changes included.
-6. Click _"Publish Release"_.
-    - This will push a new tag and trigger your publishing pipeline on CircleCI.
+```yaml
+jobs:
+  test:
+    docker:
+      - image: python:latest
+    steps:
+      - checkout
+      - run: pip install pytest
+      - test-visibility-circleci-orb/autoinstrument:
+          languages: python
+          site: datadoghq.com
+      - run: |
+          echo "export DD_API_KEY=$YOUR_API_KEY_SECRET" >> $BASH_ENV
+          echo "export DD_ENV=staging-tests"
+          echo "export DD_TAGS=layer:api,team:intake,key:value" >> $BASH_ENV
+      - run: pytest
+```
+
+## Limitations
+
+### Tracing vitest tests
+
+ℹ️ This section is only relevant if you're running tests with [vitest](https://github.com/vitest-dev/vitest).
+
+To use this script with vitest you need to modify the NODE_OPTIONS environment variable adding the `--import` flag with the value of the `DD_TRACE_ESM_IMPORT` environment variable.
+
+```yaml
+jobs:
+  test:
+    docker:
+      - image: node:latest
+    steps:
+      - checkout
+      - run: pip install pytest
+      - test-visibility-circleci-orb/autoinstrument:
+          languages: python
+          api_key: YOUR_API_KEY_SECRET
+          site: datadoghq.com
+      - run: echo "export NODE_OPTIONS=\"$NODE_OPTIONS --import $DD_TRACE_ESM_IMPORT\"" >> $BASH_ENV
+      - run: npm run test
+```
+
+**Important**: `vitest` and `dd-trace` require Node.js>=18.19 or Node.js>=20.6 to work together.
