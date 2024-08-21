@@ -1,13 +1,19 @@
 description: >
-  Sample example description.
-# Provide a use-case based example for using this orb.
-# Everything in the `usage` section will be displayed in the orb registry.
-# Comments are not retained.
+  Example usage of the Test Visibility CircleCI Orb. This example instruments Python and JavaScript tests and runs them.
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
-  workflows:
-    use-my-orb:
-      jobs:
-        - <orb-name>/<job-name>
+    test-visibility-circleci-orb: manueltest/test-visibility-circleci-orb@1.0.5 #TODO
+  jobs:
+    test:
+      docker:
+        - image: my-custom-image-with-python-and-node:latest
+      steps:
+        - checkout
+        - run: pip install pytest
+        - test-visibility-circleci-orb/autoinstrument:
+            languages: python js
+            api_key: YOUR_API_KEY_SECRET
+            site: datadoghq.com
+        - run: pytest
+        - run: npm run test

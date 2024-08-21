@@ -1,11 +1,8 @@
 version: 2.1
 
 description: >
-  test visibility autoinstrumentation fro circleci aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-# What will your orb allow users to accomplish?
-# Descriptions should be short, simple, and informative.
+  Installs Datadog tracers for configured languages and enables Test Visibility.
 
-# This information will be displayed in the orb registry and is not mandatory.
 display:
-  home_url: "https://github.com/ManuelPalenzuelaDD/test-visibility-circleci-orb"
+  home_url: "https://github.com/ManuelPalenzuelaDD/test-visibility-circleci-orb" #TODO
   source_url: "https://github.com/ManuelPalenzuelaDD/test-visibility-circleci-orb"
