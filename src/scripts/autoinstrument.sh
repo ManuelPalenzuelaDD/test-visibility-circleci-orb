@@ -8,11 +8,15 @@
 mkdir .datadog
 
 # Propagate service name and API key from inputs to environment variables
-{
-  echo "export DD_API_KEY=$DD_API_KEY"
-  echo "export DD_SERVICE=$DD_SERVICE"
-  echo "export DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER=circleci"
-} >> "$BASH_ENV"
+if [ -n "<<parameters.api_key>>" ]; then
+	echo "export DD_API_KEY=<<parameters.api_key>>" >> "$BASH_ENV"
+fi
+
+if [ -n "<<parameters.service>>" ]; then
+	echo "export DD_SERVICE=<<parameters.service>>" >> "$BASH_ENV"
+fi
+
+echo "export DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER=circleci" >> "$BASH_ENV"
 
 script_filepath="install_test_visibility.sh"
 
@@ -48,6 +52,10 @@ done < <(./install_test_visibility.sh)
 
 echo "---"
 echo "Installed Test Visibility libraries:"
+
+echo "BASH ENV BEGING"
+cat "$BASH_ENV"
+echo "BASH ENV END"
 
 # shellcheck source=/dev/null
 source "$BASH_ENV"
