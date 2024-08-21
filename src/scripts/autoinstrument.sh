@@ -7,7 +7,7 @@
 
 mkdir .datadog
 
-echo "parameter: <<parameters.api_key>>"
+echo "parameter: << parameters.api_key >>"
 
 # Propagate service name and API key from inputs to environment variables
 # shellcheck disable=SC2157
