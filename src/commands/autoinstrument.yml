@@ -17,23 +17,23 @@ parameters:
     description: 'Datadog site (optional). See https://docs.datadoghq.com/getting_started/site for more information about sites.'
     type: string
     default: datadoghq.com
-  dotnet-tracer-version:
+  dotnet_tracer_version:
     description: 'The version of Datadog .NET tracer to use (optional). Defaults to the latest release.'
     type: string
     default: ''
-  java-tracer-version:
+  java_tracer_version:
     description: 'The version of Datadog Java tracer to use (optional). Defaults to the latest release.'
     type: string
     default: ''
-  js-tracer-version:
+  js_tracer_version:
     description: 'The version of Datadog JS tracer to use (optional). Defaults to the latest release.'
     type: string
     default: ''
-  python-tracer-version:
+  python_tracer_version:
     description: 'The version of Datadog Python tracer to use (optional). Defaults to the latest release.'
     type: string
     default: ''
-  java-instrumented-build-system:
+  java_instrumented_build_system:
     description: 'If provided, only the specified build systems will be instrumented (allowed values are `gradle` and `maven`). Otherwise every Java process will be instrumented.'
     type: string
     default: ''
@@ -44,11 +44,11 @@ steps:
         DD_SERVICE: <<parameters.service>>
         DD_API_KEY: <<parameters.api_key>>
         DD_SITE: <<parameters.site>>
-        DD_SET_TRACER_VERSION_DOTNET: <<parameters.dotnet-tracer-version>>
-        DD_SET_TRACER_VERSION_JAVA: <<parameters.java-tracer-version>>
-        DD_SET_TRACER_VERSION_JS: <<parameters.js-tracer-version>>
-        DD_SET_TRACER_VERSION_PYTHON: <<parameters.python-tracer-version>>
-        DD_INSTRUMENTATION_BUILD_SYSTEM_JAVA: <<parameters.java-instrumented-build-system>>
+        DD_SET_TRACER_VERSION_DOTNET: <<parameters.dotnet_tracer_version>>
+        DD_SET_TRACER_VERSION_JAVA: <<parameters.java_tracer_version>>
+        DD_SET_TRACER_VERSION_JS: <<parameters.js_tracer_version>>
+        DD_SET_TRACER_VERSION_PYTHON: <<parameters.python_tracer_version>>
+        DD_INSTRUMENTATION_BUILD_SYSTEM_JAVA: <<parameters.java_instrumented_build_system>>
         INSTALLATION_SCRIPT_URL: https://install.datadoghq.com/scripts/install_test_visibility_v2.sh
         INSTALLATION_SCRIPT_CHECKSUM: 7c888969cf45b4a2340d5cf58afa2e7110a295904ca182724b88a3d19e9bc18d
       name: Configure Datadog Test Visibility
