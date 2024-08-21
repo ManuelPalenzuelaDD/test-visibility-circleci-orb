@@ -20,15 +20,25 @@ release-filters: &release-filters
     only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
 
 jobs:
-  # Create jobs to test the commands of your orbs.
-  # You may want to add additional validation steps to ensure the commands are working as expected.
+  # Test that the autoinstrumentation command orb works as expected.
   command-test:
     docker:
-      - image: cimg/base:current
+      - image: adoptopenjdk/openjdk11:latest
     steps:
       - checkout
-      # Run your orb's commands to validate them.
-      - test-visibility-circleci-orb/greet
+      # You can pass environment variables at runtime like so
+      - run: echo 'export DD_API_KEY=dummy' >> $BASH_ENV
+      - test-visibility-circleci-orb/autoinstrument:
+          languages: java
+      - run:
+          name: Test that java has been instrumented with test visibility
+          command: |
+            java -version 2>&1 | tee $LOG_FILE
+            grep -q "$TRACER_INIT_LOG" $LOG_FILE || { echo "Error: Output does not contain tracer initialisation log: $TRACER_INIT_LOG"; exit 1; }
+          environment:
+            DD_SERVICE: my-service
+            LOG_FILE: java-output.log
+            TRACER_INIT_LOG: CI Visibility settings
 workflows:
   test-deploy:
     jobs:
