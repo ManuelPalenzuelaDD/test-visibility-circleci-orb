@@ -27,12 +27,11 @@ jobs:
       - image: adoptopenjdk/openjdk11:latest
     steps:
       - checkout
-      - run: echo 'export TEST1234=1234' >> $BASH_ENV
+      - run: echo 'export API=dummy' >> $BASH_ENV #You can pass environment variables at runtime like so
       # Test that the autoinstrumentation command orb works as expected.
       - test-visibility-circleci-orb/autoinstrument:
           languages: java
           service: my-service
-          api_key: dummy
       - run:
           name: test
           command: |
@@ -41,6 +40,7 @@ jobs:
           environment:
             LOG_FILE: java-output.log
             TRACER_INIT_LOG: CI Visibility settings
+            DD_API_KEY: $API
 workflows:
   test-deploy:
     jobs:
