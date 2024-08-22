@@ -5,12 +5,11 @@
 # This product includes software developed at Datadog (https://www.datadoghq.com/)
 # Copyright 2024-present Datadog, Inc.
 
-mkdir .datadog
-
-# Propagate service name, site and API key from inputs to environment variables
-if [ -n "$API_KEY" ]; then
-	echo "export DD_API_KEY=$API_KEY" >> "$BASH_ENV"
+if [ -z "$DD_API_KEY" ]; then
+	>&2 echo "Error: DD_API_KEY environment variable not provided." && exit 1
 fi
+
+# Propagate service name and site from inputs to environment variables
 if [ -n "$SERVICE" ]; then
 	echo "export DD_SERVICE=$SERVICE" >> "$BASH_ENV"
 fi

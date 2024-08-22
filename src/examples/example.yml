@@ -3,7 +3,7 @@ description: >
 usage:
   version: 2.1
   orbs:
-    test-visibility-circleci-orb: manueltest/test-visibility-circleci-orb@1 #TODO
+    test-visibility-circleci-orb: datadog/test-visibility-circleci-orb@1
   jobs:
     test:
       docker:
@@ -13,7 +13,6 @@ usage:
         - run: pip install pytest
         - test-visibility-circleci-orb/autoinstrument:
             languages: python js
-            api_key: YOUR_API_KEY_SECRET
             site: datadoghq.com
         - run: pytest
         - run: npm install && npm run test

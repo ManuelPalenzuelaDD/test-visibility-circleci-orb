@@ -4,5 +4,5 @@ description: >
   Installs Datadog tracers for configured languages and enables Test Visibility.
 
 display:
-  home_url: "https://github.com/ManuelPalenzuelaDD/test-visibility-circleci-orb" #TODO
-  source_url: "https://github.com/ManuelPalenzuelaDD/test-visibility-circleci-orb"
+  home_url: "https://github.com/example/test" #TODO
+  source_url: "https://github.com/example/test"

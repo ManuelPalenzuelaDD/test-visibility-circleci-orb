@@ -1,5 +1,7 @@
 # <img height="25" src="logos/test_visibility_logo.png" />  Datadog Test Visibility CircleCI Orb
 
+TODO: Test mkdir datadog and api key
+
 [CircleCI orb](https://circleci.com/orbs/registry/orb/datadog/test-visibility-circleci-orb) that installs and configures [Datadog Test Visibility](https://docs.datadoghq.com/tests/).
 Supported languages are .NET, Java, Javascript, and Python.
 
@@ -10,13 +12,15 @@ It can help you investigate and mitigate performance problems and test failures 
 
 ## Usage
 
-Execute this command orb as part of your CircleCI job YAML before running the tests. Set the languages, api key and [site](https://docs.datadoghq.com/getting_started/site/) parameters:
+1. [Add](https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project) the `DD_API_KEY` environment variable to your CircleCI project settings with the value of your [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys).
+
+2. Execute this command orb as part of your CircleCI job YAML before running the tests. Set the languages and [site](https://docs.datadoghq.com/getting_started/site/) parameters:
 
  ```yaml
 version: 2.1
 
 orbs:
-  test-visibility-circleci-orb: manueltest/test-visibility-circleci-orb@1 #TODO
+  test-visibility-circleci-orb: datadog/test-visibility-circleci-orb@1
 
 jobs:
   test:
@@ -27,7 +31,6 @@ jobs:
       - run: pip install pytest
       - test-visibility-circleci-orb/autoinstrument:
           languages: python
-          api_key: YOUR_API_KEY_SECRET
           site: datadoghq.com
       - run: pytest
  ```
@@ -39,7 +42,6 @@ The orb has the following parameters:
 | Name | Description | Required | Default |
 | ---- | ----------- | -------- | ------- |
  | languages | List of languages to be instrumented. Can be either "all" or any of "java", "js", "python", "dotnet" (multiple languages can be specified as a space-separated list). | true | |
- | api_key | Datadog API key. Can be found at https://app.datadoghq.com/organization-settings/api-keys | true | |
  | site | Datadog site. See https://docs.datadoghq.com/getting_started/site for more information about sites. | false | datadoghq.com |
  | service | The name of the service or library being tested. | false | |
  | dotnet_tracer_version | The version of Datadog .NET tracer to use. Defaults to the latest release. | false | |
@@ -60,13 +62,13 @@ jobs:
     steps:
       - checkout
       - run: pip install pytest
-      - test-visibility-circleci-orb/autoinstrument:
-          languages: python
-          site: datadoghq.com
       - run: |
           echo "export DD_API_KEY=$YOUR_API_KEY_SECRET" >> $BASH_ENV
           echo "export DD_ENV=staging-tests" >> $BASH_ENV
           echo "export DD_TAGS=layer:api,team:intake,key:value" >> $BASH_ENV
+      - test-visibility-circleci-orb/autoinstrument:
+          languages: python
+          site: datadoghq.com
       - run: pytest
 ```
 
@@ -88,7 +90,6 @@ jobs:
       - run: pip install pytest
       - test-visibility-circleci-orb/autoinstrument:
           languages: python
-          api_key: YOUR_API_KEY_SECRET
           site: datadoghq.com
       - run: echo "export NODE_OPTIONS=\"$NODE_OPTIONS --import $DD_TRACE_ESM_IMPORT\"" >> $BASH_ENV
       - run: npm run test

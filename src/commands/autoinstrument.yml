@@ -8,10 +8,6 @@ parameters:
     description: 'The name of the service or library being tested.'
     type: string
     default: ''
-  api_key:
-    description: 'Datadog API key. Can be found at https://app.datadoghq.com/organization-settings/api-keys'
-    type: string
-    default: ''
   site:
     description: 'Datadog site (optional). See https://docs.datadoghq.com/getting_started/site for more information about sites.'
     type: string
@@ -39,7 +35,6 @@ parameters:
 steps:
   - run:
       environment:
-        API_KEY: <<parameters.api_key>>
         SERVICE: <<parameters.service>>
         SITE: <<parameters.site>>
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: <<parameters.languages>>
