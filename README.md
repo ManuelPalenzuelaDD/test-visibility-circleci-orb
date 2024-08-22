@@ -65,7 +65,7 @@ jobs:
           site: datadoghq.com
       - run: |
           echo "export DD_API_KEY=$YOUR_API_KEY_SECRET" >> $BASH_ENV
-          echo "export DD_ENV=staging-tests"
+          echo "export DD_ENV=staging-tests" >> $BASH_ENV
           echo "export DD_TAGS=layer:api,team:intake,key:value" >> $BASH_ENV
       - run: pytest
 ```
