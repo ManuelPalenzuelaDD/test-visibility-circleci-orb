@@ -16,7 +16,7 @@ Execute this command orb as part of your CircleCI job YAML before running the te
 version: 2.1
 
 orbs:
-  test-visibility-circleci-orb: manueltest/test-visibility-circleci-orb@1.0.5 #TODO
+  test-visibility-circleci-orb: manueltest/test-visibility-circleci-orb@1 #TODO
 
 jobs:
   test:
