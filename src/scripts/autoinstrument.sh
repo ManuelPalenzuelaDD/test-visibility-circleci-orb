@@ -5,6 +5,8 @@
 # This product includes software developed at Datadog (https://www.datadoghq.com/)
 # Copyright 2024-present Datadog, Inc.
 
+
+echo "NewCheck: $DDD_API_KEY"
 if [ -z "$DDD_API_KEY" ]; then
 	>&2 echo "Error: DD_API_KEY environment variable not provided." && exit 1
 fi
