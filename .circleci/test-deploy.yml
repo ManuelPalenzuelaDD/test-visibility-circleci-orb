@@ -28,6 +28,7 @@ jobs:
       - checkout
       # You can pass environment variables at runtime like so
       - run: echo 'export DD_API_KEY=dummy' >> $BASH_ENV
+      - run: echo 'export DDD_API_KEY=dummy' >> $BASH_ENV
       - test-visibility-circleci-orb/autoinstrument:
           languages: java
       - run:
