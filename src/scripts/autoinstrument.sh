@@ -6,8 +6,8 @@
 # Copyright 2024-present Datadog, Inc.
 
 
-echo "NewCheck: $DDD_API_KEY"
-if [ -z "$DDD_API_KEY" ]; then
+echo "NewCheck: $DD_API_KEY"
+if [ -z "$DD_API_KEY" ]; then
 	>&2 echo "Error: DD_API_KEY environment variable not provided." && exit 1
 fi
 
